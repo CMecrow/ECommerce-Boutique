@@ -3,12 +3,12 @@ from django.contrib import messages
 
 from products.models import Product
 
+# Create your views here.
 
 def view_bag(request):
-    """ A view that renders the shopping bag """
+    """ A view that renders the bag contents page """
 
     return render(request, 'bag/bag.html')
-
 
 def add_to_bag(request, item_id):
     """ Add a quantity of the specified product to the shopping bag """
@@ -34,11 +34,11 @@ def add_to_bag(request, item_id):
             bag[item_id] += quantity
         else:
             bag[item_id] = quantity
-            messages.success(request, f'Added {product.name} to shopping bag')
+            messages.success(request, f'Added {product.name} to your bag')
 
     request.session['bag'] = bag
     return redirect(redirect_url)
-
+    
 
 def adjust_bag(request, item_id):
     """Adjust the quantity of the specified product to the specified amount"""
